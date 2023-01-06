@@ -7,6 +7,7 @@ from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
 import numpy as np
 from torchvision import transforms
+from pytorch_lightning import Callback, Trainer
 
 
 def get_data(path):
@@ -60,34 +61,32 @@ def main(model_checkpoint, data_path):
 
     test_dataset = TensorDataset(images, labels)  # create your datset
     testloader = DataLoader(
-        test_dataset, batch_size=64
+        test_dataset, batch_size=64, num_workers=8
     )  # create your dataloader
 
-    with torch.no_grad():
-        for images, labels in testloader:
-            # resize images
-            images = images.view(images.shape[0], -1)
+    # with torch.no_grad():
+    #     for images, labels in testloader:
+    #         # resize images
+    #         images = images.view(images.shape[0], -1)
 
-            mymodel.eval()
-            logps = mymodel.forward(images)
-            ps = torch.exp(logps)
+    #         mymodel.eval()
+    #         logps = mymodel.forward(images)
+    #         ps = torch.exp(logps)
 
-            # Take max from the probs
-            top_p, top_class = ps.topk(1, dim=1)
+    #         # Take max from the probs
+    #         top_p, top_class = ps.topk(1, dim=1)
 
-            # Compare with labels
-            equals = top_class == labels.view(*top_class.shape)
+    #         # Compare with labels
+    #         equals = top_class == labels.view(*top_class.shape)
 
-            # mean
-            accuracy = torch.mean(equals.type(torch.FloatTensor))
-
-    print(f'Accuracy: {accuracy.item()*100}%')
+    #         # mean
+    #         accuracy = torch.mean(equals.type(torch.FloatTensor))
 
 
-    
+    trainer = Trainer()
+    trainer.test(mymodel, testloader)
 
-
-    
+    # print(f'Accuracy: {accuracy.item()*100}%')
 
 
 if __name__ == "__main__":
