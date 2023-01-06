@@ -3,45 +3,39 @@ from torch.utils.data import DataLoader, TensorDataset
 import torch
 from matplotlib import pyplot as plt
 from torch import nn, optim
+from pytorch_lightning import Callback, Trainer
+import pytorch_lightning as pl
+from pytorch_lightning.loggers import WandbLogger
 
-model =  model.MyAwesomeModel(784, 10)
+# model =  model.MyAwesomeModel(784, 10)
 
 images = torch.load("data/processed/images.pt")
 labels = torch.load("data/processed/labels.pt")
 
 train_dataset = TensorDataset(images, labels)  # create your datset
-trainloader = DataLoader(
-    train_dataset, batch_size=64, shuffle=True
-)  
+trainloader = DataLoader(train_dataset, batch_size=64, shuffle=True, num_workers=8)
 
-n_epochs = 40
 
-criterion = nn.NLLLoss()
-optimizer = optim.SGD(model.parameters(), lr=0.3)
+class MetricTracker(Callback):
+    def __init__(self):
+        self.collection = []
 
-steps = 0
-losses = []
-for e in range(n_epochs):
-    running_loss = 0
-    for images, labels in trainloader:
-        # Flatten MNIST images into a 784 long vector
-        images = images.view(images.shape[0], -1)
-        optimizer.zero_grad()
+    def on_train_epoch_end(self, trainer: "pl.Trainer", pl_module: "pl.LightningModule"):
+        elogs = trainer.logged_metrics
+        self.collection.append(elogs["train_loss"])
+        # print(elogs)
 
-        output = model(images)
 
-        loss = criterion(output, labels)
-        loss.backward()
+cb = MetricTracker()
+model = model.MyAwesomeModel(784, 10)
 
-        optimizer.step()
-        running_loss += loss.item()
+trainer = Trainer(max_epochs=30, callbacks=[cb], limit_train_batches=0.2, logger=WandbLogger(project="dtu_mlops"))
 
-    else:
-        losses.append(running_loss/len(trainloader))
-        steps += 1
-        print(f"Training loss: {running_loss/len(trainloader)}")
+trainer.fit(model, trainloader)
 
-steps = [i for i in range(steps)]
+# Create plot for training loss
+losses = [i.item() for i in cb.collection]
+steps = [i for i in range(len(losses))]
 
 # Use the plot function to draw a line plot
 plt.plot(steps, losses)
@@ -51,7 +45,7 @@ plt.title("Training Loss vs Training Steps")
 plt.xlabel("Training Steps")
 plt.ylabel("Training Loss")
 
-# Save the plot
+# # Save the plot
 plt.savefig("reports/figures/lossV1.png")
 
-torch.save(model.state_dict(), 'models/trained_modelV1.pt')
+torch.save(model.state_dict(), 'models/trained_modelV2.pt')

@@ -3,6 +3,22 @@ MLOps cc
 
 DTU MLOps project using cookiecutter
 
+# Execute with Docker
+
+## Build
+### Build trainer
+`docker build -f trainer.dockerfile . -t trainer:latest`
+
+### Build tester
+`docker build -f predict.dockerfile . -t predict:latest`
+
+## Execute
+### Train
+`docker run -e  WANDB_API_KEY=<key> --name experimentpl2 trainer:latest -v $(pwd)/models/from_docker:/models/`
+
+### Test
+`docker run predict models/trained_modelV2.pt data/raw/test.npz`
+
 Project Organization
 ------------
 
