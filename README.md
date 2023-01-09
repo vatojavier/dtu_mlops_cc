@@ -1,4 +1,6 @@
 MLOps cc
+
+[![Run tests](https://github.com/vatojavier/dtu_mlops_cc/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/vatojavier/dtu_mlops_cc/actions/workflows/test.yml)
 ==============================
 
 DTU MLOps project using cookiecutter
