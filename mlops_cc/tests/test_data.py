@@ -4,6 +4,7 @@ import torch
 import pytest
 import os
 
+
 @pytest.mark.skipif(not os.path.exists("data/processed/images.pt"), reason="Data files not found")
 @pytest.mark.skipif(not os.path.exists("data/processed/labels.pt"), reason="Data files not found")
 def test_data():
