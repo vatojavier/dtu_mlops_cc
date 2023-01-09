@@ -1,7 +1,11 @@
 from torch.utils.data import DataLoader, TensorDataset
 from mlops_cc.models.predict_model import get_data
 import torch
+import pytest
+import os
 
+@pytest.mark.skipif(not os.path.exists("data/processed/images.pt"), reason="Data files not found")
+@pytest.mark.skipif(not os.path.exists("data/processed/labels.pt"), reason="Data files not found")
 def test_data():
     N_TRAIN = 25000
     N_TEST = 5000

@@ -7,8 +7,11 @@ from torch import nn, optim
 from pytorch_lightning import Callback, Trainer
 import pytorch_lightning as pl
 from pytorch_lightning.loggers import WandbLogger
+import pytest
+import os
 
-
+@pytest.mark.skipif(not os.path.exists("data/processed/images.pt"), reason="Data files not found")
+@pytest.mark.skipif(not os.path.exists("data/processed/labels.pt"), reason="Data files not found")
 def test_training():
 
     images = torch.load("data/processed/images.pt")
