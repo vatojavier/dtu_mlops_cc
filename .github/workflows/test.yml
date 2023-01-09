@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: iterative/setup-dvc@v1
     - name: Checkout
       uses: actions/checkout@v3
     - name: Set up Python 3.10
@@ -20,7 +21,6 @@ jobs:
         python-version: 3.10.x
         cache: 'pip'
     - name: Get data
-      uses: iterative/setup-dvc@v1
       run: dvc pull
       env:
         GDRIVE_CREDENTIALS_DATA: $
