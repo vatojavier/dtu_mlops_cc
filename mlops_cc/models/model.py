@@ -2,7 +2,6 @@ import torch.nn.functional as F
 from torch import nn
 import pytorch_lightning as pl
 from torch import nn, optim
-import wandb
 import torch
 
 class MyAwesomeModel(pl.LightningModule):

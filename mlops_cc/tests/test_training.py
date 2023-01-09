@@ -2,11 +2,8 @@
 from mlops_cc.models import model
 from torch.utils.data import DataLoader, TensorDataset
 import torch
-from matplotlib import pyplot as plt
-from torch import nn, optim
 from pytorch_lightning import Callback, Trainer
 import pytorch_lightning as pl
-from pytorch_lightning.loggers import WandbLogger
 import pytest
 import os
 
@@ -34,7 +31,7 @@ def test_training():
     cb = MetricTracker()
     mymodel = model.MyAwesomeModel(784, 10)
 
-    trainer = Trainer(max_epochs=5, callbacks=[cb], limit_train_batches=0.2, logger=WandbLogger(project="dtu_mlops"))
+    trainer = Trainer(max_epochs=5, callbacks=[cb], limit_train_batches=0.2)
 
     trainer.fit(mymodel, trainloader)
 
