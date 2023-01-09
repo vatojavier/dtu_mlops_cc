@@ -1,0 +1,76 @@
+{
+    "os": "Linux-5.15.0-56-generic-x86_64-with-glibc2.35",
+    "python": "3.10.6",
+    "heartbeatAt": "2023-01-09T10:01:20.605909",
+    "startedAt": "2023-01-09T10:01:19.506899",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/javi/.virtualenvs/mlops/bin/pytest",
+    "git": {
+        "remote": "git@github.com:vatojavier/dtu_mlops_cc.git",
+        "commit": "4578ca3e708030c9eb6f2c93c7c9b77bfada0596"
+    },
+    "email": "vatojavier@gmail.com",
+    "root": "/home/javi/Desktop/DTU/courses/2_term/dtu_mlops_personal/mlops_cc",
+    "host": "javi-HP",
+    "username": "javi",
+    "executable": "/home/javi/.virtualenvs/mlops/bin/python",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 2598.245625,
+        "min": 400.0,
+        "max": 4700.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2800.0,
+            "min": 400.0,
+            "max": 4700.0
+        },
+        {
+            "current": 2800.0,
+            "min": 400.0,
+            "max": 4700.0
+        },
+        {
+            "current": 2800.0,
+            "min": 400.0,
+            "max": 4700.0
+        },
+        {
+            "current": 2800.0,
+            "min": 400.0,
+            "max": 4700.0
+        },
+        {
+            "current": 1185.965,
+            "min": 400.0,
+            "max": 4700.0
+        },
+        {
+            "current": 2800.0,
+            "min": 400.0,
+            "max": 4700.0
+        },
+        {
+            "current": 2800.0,
+            "min": 400.0,
+            "max": 4700.0
+        },
+        {
+            "current": 2800.0,
+            "min": 400.0,
+            "max": 4700.0
+        }
+    ],
+    "disk": {
+        "total": 233.98657608032227,
+        "used": 123.24667358398438
+    },
+    "memory": {
+        "total": 11.34130859375
+    }
+}

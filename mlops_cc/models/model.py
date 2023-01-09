@@ -25,7 +25,14 @@ class MyAwesomeModel(pl.LightningModule):
 
         self.relu = nn.ReLU()
 
-    def forward(self, x):
+    def forward(self, x: torch.Tensor):
+
+        if x.ndim != 2:
+            raise ValueError("Expected input to a 2D tensor")
+
+        if x.shape[1] != 784:
+            raise ValueError("Expected a 784 image vector")
+
 
         x = self.relu(self.fc1(x))
         x = self.relu(self.fc2(x))
