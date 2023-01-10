@@ -11,7 +11,7 @@ class MyAwesomeModel(pl.LightningModule):
 
     losses = []
     def __init__(self, input_size, output_size):
-        
+
 
 
         super().__init__()
@@ -24,6 +24,7 @@ class MyAwesomeModel(pl.LightningModule):
 
         self.relu = nn.ReLU()
 
+    # TODO: Resize images inside here?
     def forward(self, x: torch.Tensor):
 
         if x.ndim != 2:
@@ -41,11 +42,11 @@ class MyAwesomeModel(pl.LightningModule):
         return x
 
     def configure_optimizers(self):
-        # params = 
+        # params =
         optimizer = optim.SGD(self.parameters(), lr=0.3)
         return optimizer
-       
-    
+
+
     def training_step(self, batch, batch_idx):
         images, labels = batch
 
@@ -78,11 +79,3 @@ class MyAwesomeModel(pl.LightningModule):
         accuracy = torch.mean(equals.type(torch.FloatTensor))
         self.log('test_accuracy', accuracy)
         return accuracy
-
-
-
-
-
-        
-
-
