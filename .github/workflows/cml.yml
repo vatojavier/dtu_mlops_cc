@@ -6,15 +6,18 @@ jobs:
   run:
     runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: iterative/setup-cml@v1
       - uses: iterative/setup-dvc@v1
+      - uses: actions/setup-python@v4
       - name: Get data
         run: dvc pull
         env:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
       - name: Train model
         run: |
+          python -m pip install --upgrade pip
+          pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu
           pip install -r requirements.txt  # install dependencies
           python mlops_cc/models/train_cml.py  # run training
       - name: Write report
