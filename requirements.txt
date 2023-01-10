@@ -7,4 +7,5 @@ pytorch_lightning==1.8.6
 # torch==1.13.1+cpu
 # torchvision==0.14.1+cpu
 wandb==0.13.7
+scikit_learn==1.2.0
 -e .
