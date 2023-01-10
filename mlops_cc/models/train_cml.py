@@ -38,4 +38,5 @@ with open("reports/classification_report.txt", 'w') as outfile:
 
 confmat = confusion_matrix(target, preds, labels=[i for i in range(10)])
 disp = ConfusionMatrixDisplay(confusion_matrix=confmat, display_labels=[i for i in range(10)])
+disp.plot()
 plt.savefig('reports/figures/confusion_matrix.png')
