@@ -21,9 +21,9 @@ jobs:
           pip install -r requirements.txt  # install dependencies
           python mlops_cc/models/train_cml.py  # run training
       - name: Write report
-        # env:
-        #   # this authenticates that the right permissions are in place
-        #   REPO_TOKEN: $
+        env:
+          # this authenticates that the right permissions are in place
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # send all information to report.md that will be reported to us when the workflow finish
           cat reports/classification_report.txt >> report.md
