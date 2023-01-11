@@ -7,7 +7,6 @@ RUN apt update && \
 COPY requirements.txt requirements.txt
 COPY setup.py setup.py
 COPY mlops_cc/ mlops_cc/
-COPY data/ data/
 COPY reports/ reports/
 COPY models/ models/
 
@@ -17,6 +16,7 @@ RUN pip install -r requirements.txt --no-cache-dir
 # torch cpu requires special command
 RUN pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu --no-cache-dir
 RUN dvc pull
+COPY data/ data/
 
 # and finally our own module
 RUN pip install -e .
