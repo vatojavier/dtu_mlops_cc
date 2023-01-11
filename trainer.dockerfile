@@ -9,6 +9,7 @@ COPY setup.py setup.py
 COPY mlops_cc/ mlops_cc/
 COPY reports/ reports/
 COPY models/ models/
+COPY .dvc/config .dvc/config
 
 WORKDIR /
 RUN pip install --upgrade pip
