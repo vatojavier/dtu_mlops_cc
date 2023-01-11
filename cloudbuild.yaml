@@ -1,4 +1,14 @@
 steps:
+   - name: python
+     entrypoint: python
+     args: ["-m", "pip", "install", "dvc[gs]"]
+   - name: python
+     entrypoint: python
+     args: ["-m", "dvc", "pull"]
+  #  - name: bash
+  #    script: |
+  #    #!/usr/bin/env bash
+  #    echo "Hello World"
    - name: 'gcr.io/cloud-builders/docker'
      args: ['build', '-f' , 'trainer.dockerfile', '-t', 'gcr.io/positive-notch-374310/trainer-mnist', '.']
    - name: 'gcr.io/cloud-builders/docker'
