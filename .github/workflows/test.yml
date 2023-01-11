@@ -20,6 +20,11 @@ jobs:
       with:
         python-version: 3.10.x
         cache: 'pip'
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
     - name: Get data
       run: dvc pull
       env:
