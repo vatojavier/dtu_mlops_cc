@@ -16,3 +16,6 @@ workerPoolSpecs:
    replicaCount: 1
    containerSpec:
       imageUri: gcr.io/positive-notch-374310/trainer:v.2
+      env:
+         - name: WANDB_API_KEY
+           value: 24e890c4ed63bff440bd2fc4ad73d1cb0ca74ab0

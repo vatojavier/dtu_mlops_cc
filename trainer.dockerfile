@@ -9,16 +9,13 @@ COPY setup.py setup.py
 COPY mlops_cc/ mlops_cc/
 COPY reports/ reports/
 COPY models/ models/
-COPY .dvc/config .dvc/config
+COPY data/ data/
 
 WORKDIR /
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt --no-cache-dir
 # torch cpu requires special command
 RUN pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu --no-cache-dir
-RUN pip install dvc[gs]
-RUN python -m dvc pull
-COPY data/ data/
 
 # and finally our own module
 RUN pip install -e .
